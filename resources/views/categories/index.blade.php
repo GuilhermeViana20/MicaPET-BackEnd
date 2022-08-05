@@ -68,30 +68,35 @@
             </div>
             @endif
 
-            @if (isset($categories))
+            <table class="table table-bordered">
+                <tr>
+                    <th>No</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Address</th>
+                    <th width="280px">Action</th>
+                </tr>
+                @php
+                    $i = 0;
+                @endphp
                 @foreach ($categories as $category)
-
-                    <div class="row">
-                        <div class="col-md-3 mb-3">
-
-                            <img src="{{ $category->image }}" class="img-thumbnail">
-
-                            <a href="{{ route('categories.edit', $category->id) }}">
-                                <button class="bi bi-pencil-fill icon-pencil"></button>
-                            </a>
-
-                            <form action="{{ route('categories.destroy',$category->id) }}" method="Post">
+                    <tr>
+                        <td>{{ ++$i }}</td>
+                        <td>{{ $category->name }}</td>
+                        <td>{{ $category->description }}</td>
+                        <td>{{ $category->active }}</td>
+                        {{-- <td>
+                            <form action="{{ route('category.destroy',$category->id) }}" method="POST">
+                                <a class="btn btn-info" href="{{ route('category.show',$category->id) }}">Show</a>
+                                <a class="btn btn-primary" href="{{ route('category.edit',$category->id) }}">Edit</a>
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="bi bi-trash icon-trash"></button>
+                                <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
-
-                        </div>
-                    </div>
+                        </td> --}}
+                    </tr>
                 @endforeach
-            @else
-                <p>Ops... Não há produtos!</p>
-            @endif
+            </table>
             {!! $categories->links() !!}
         </div>
     </body>
