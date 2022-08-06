@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
@@ -17,7 +18,8 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('products.create');
+        $categories = Category::all();
+        return view('products.create')->with(compact('categories'));
     }
 
     public function store(Request $request)
@@ -29,6 +31,7 @@ class ProductController extends Controller
             'image' => 'required',
             'description' => 'required',
             'promotional_price' => 'required',
+            'category_id' => 'required',
             'in_promotion' => 'required',
             'active' => 'required',
         ]);
@@ -40,6 +43,7 @@ class ProductController extends Controller
         $product->image = $request->image;
         $product->description = $request->description;
         $product->promotional_price = $request->promotional_price;
+        $product->category_id = $request->category_id;
         $product->in_promotion = $request->in_promotion;
         $product->active = $request->active;
 
@@ -72,6 +76,7 @@ class ProductController extends Controller
             'image' => 'required',
             'description' => 'required',
             'promotional_price' => 'required',
+            'category_id' => 'required',
             'in_promotion' => 'required',
             'active' => 'required',
         ]);
@@ -83,6 +88,7 @@ class ProductController extends Controller
         $product->image = $request->image;
         $product->description = $request->description;
         $product->promotional_price = str_replace('R$ ', '', $request->promotional_price);
+        $product->category_id = $request->category_id;
         $product->in_promotion = $request->in_promotion;
         $product->active = $request->active;
         $product->save();

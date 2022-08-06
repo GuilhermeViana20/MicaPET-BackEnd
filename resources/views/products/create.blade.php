@@ -93,9 +93,10 @@
                     <div class="mb-3">
                         <div class="form-group">
                             <strong>Category:</strong>
-                            <select class="form-select" name="category">
-                                <option selected value="1">Active</option>
-                                <option value="0">Disabled</option>
+                            <select class="form-select" name="category_id">
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>

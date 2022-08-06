@@ -49,7 +49,7 @@
         <div class="container mt-2">
 
             <div class="row">
-                <div class="col-lg-12 margin-tb">
+                <div class="col-lg-12 mb-3">
                     <div class="pull-left">
                         <h2>Laravel 9 CRUD Example Tutorial</h2>
                     </div>
@@ -69,29 +69,28 @@
             @endif
 
             @if (isset($products))
-                @foreach ($products as $product)
+                <div class="row">
+                    @foreach ($products as $product)
+                    <div class="col-md-3 mb-3" style="position: relative">
 
-                    <div class="row">
-                        <div class="col-md-3 mb-3">
+                        <img src="{{ $product->image }}" class="img-thumbnail">
 
-                            <img src="{{ $product->image }}" class="img-thumbnail">
-
-                            <div>
-                                <a href="{{ route('products.edit', $product->id) }}">
-                                    <button class="bi bi-pencil-fill icon-pencil"></button>
-                                </a>
-
-                            </div>
-
-                            <form action="{{ route('products.destroy',$product->id) }}" method="Post">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="bi bi-trash icon-trash"></button>
-                            </form>
+                        <div>
+                            <a href="{{ route('products.edit', $product->id) }}">
+                                <button class="bi bi-pencil-fill icon-pencil"></button>
+                            </a>
 
                         </div>
+
+                        <form action="{{ route('products.destroy',$product->id) }}" method="Post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bi bi-trash icon-trash"></button>
+                        </form>
+
                     </div>
-                @endforeach
+                    @endforeach
+                </div>
             @else
                 <p>Ops... Não há produtos!</p>
             @endif
